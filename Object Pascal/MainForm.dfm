@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 132
   Width = 601
   Height = 542
-  Caption = 'Form1'
+  Caption = 'Grid Search Demo'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 120
   TextHeight = 16
   object Panel1: TPanel
@@ -42,7 +43,7 @@ object Form1: TForm1
       TabOrder = 1
     end
     object btnMakeGrid: TButton
-      Left = 168
+      Left = 160
       Top = 9
       Width = 105
       Height = 25
@@ -51,7 +52,7 @@ object Form1: TForm1
       OnClick = btnMakeGridClick
     end
     object btnSearch: TButton
-      Left = 384
+      Left = 416
       Top = 8
       Width = 75
       Height = 25
@@ -60,13 +61,25 @@ object Form1: TForm1
       OnClick = btnSearchClick
     end
     object btnReset: TButton
-      Left = 480
+      Left = 504
       Top = 8
       Width = 75
       Height = 25
       Caption = 'Reset'
       TabOrder = 4
       OnClick = btnResetClick
+    end
+    object cbAlgorithm: TComboBox
+      Left = 288
+      Top = 8
+      Width = 121
+      Height = 24
+      Style = csDropDownList
+      ItemHeight = 16
+      TabOrder = 5
+      Items.Strings = (
+        'Depth first'
+        'Breadth first')
     end
   end
   object MainPanel: TPanel

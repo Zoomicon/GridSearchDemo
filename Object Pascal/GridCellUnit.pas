@@ -1,9 +1,11 @@
+//Version: 21May2003
+
 unit GridCellUnit;
 
 interface
  uses Classes,Controls,ExtCtrls;
 
- type TCellType=(Empty,Obstacle,Start,Goal,Searched);
+ type TCellType=(ctEmpty,ctObstacle,ctStart,ctGoal,ctSearched);
 
  type TGridCell=class(TPanel)
   private
@@ -16,6 +18,8 @@ interface
    class procedure CellMouseDown(Sender:TObject; Button:TMouseButton; Shift:TShiftState; X,Y:Integer);
   public
    constructor Create(theParent:TWinControl; theRow,theCol:integer);
+   procedure reset;
+   procedure flash;
   published
    property row:integer read fRow write fRow;
    property col:integer read fCol write fCol;
@@ -33,7 +37,7 @@ begin
  row:=theRow;
  col:=theCol;
  step:=0;
- cellType:=Empty;
+ cellType:=ctEmpty;
  font.size:=18;
  OnMouseDown:=CellMouseDown;
 end;
@@ -42,32 +46,66 @@ procedure TGridCell.setCellType(const Value: TCellType);
 begin
  fCellType:=Value;
  case value of
-  Empty: begin text:=''; color:=clWhite; end;
-  Obstacle: begin text:=''; color:=clDkGray; end;
-  Start: begin text:='S'; color:=clWhite; end;
-  Goal: begin text:='G'; color:=clWhite; end;
-  Searched: begin text:=intToStr(step); color:=clRed; end;
+  ctEmpty: begin text:=''; color:=clWhite; end;
+  ctObstacle: begin text:=''; color:=clDkGray; end;
+  ctStart: begin text:='S'; color:=clWhite; end;
+  ctGoal: begin text:='G'; color:=clWhite; end;
+  ctSearched: begin text:=intToStr(step); color:=clRed; end;
   end;
 end;
 
 procedure TGridCell.setStep(const Value: integer);
 begin
  fStep := Value;
- if cellType=Empty then cellType:=Searched;
+ if cellType=ctEmpty then cellType:=ctSearched;
 end;
 
+procedure TGridCell.reset;
+begin
+ step:=0;
+ cellType:=ctEmpty;
+end;
+
+procedure TGridCell.flash;
+var i:integer;
+begin
+ for i:=0 to 100000 do color:=clYellow;
+ repaint;
+ parent.Repaint;
+ for i:=0 to 100000 do cellType:=cellType;
+ repaint;
+ parent.Repaint;
+end;
+
+//
+
 class procedure TGridCell.CellMouseDown(Sender:TObject; Button:TMouseButton; Shift:TShiftState; X,Y:Integer);
+const lastmanualstep:integer=0; //allow user to turn cells to manually number cells by CTRL+Clicking them
 begin
  With Sender As TGridCell do
   begin
+
+  If ssShift In Shift then lastmanualstep:=0; //can CTRL+SHIFT+Click for setting the first cell's number
+
+  If ssCtrl In Shift then
+   begin
+    if cellType=ctEmpty Then
+     begin
+      lastmanualstep:=lastmanualstep+1;
+      step:=lastmanualstep;
+     end
+   end
+
+   else
+
    if button=mbRight then
-    cellType:=Empty
+    cellType:=ctEmpty
    else
     case cellType of
-     Empty: cellType:=Obstacle;
-     Obstacle: cellType:=Start;
-     Start: cellType:=Goal;
-     Goal: cellType:=Empty;
+     ctEmpty: cellType:=ctObstacle;
+     ctObstacle: cellType:=ctStart;
+     ctStart: cellType:=ctGoal;
+     ctGoal: cellType:=ctEmpty;
      end;
   end;
 end;

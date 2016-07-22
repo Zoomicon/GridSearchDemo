@@ -56,7 +56,7 @@ ActiveLang=
 ProjectLang=$00000408
 RootDir=
 [Version Info]
-IncludeVerInfo=0
+IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=1
 MinorVer=0
@@ -71,14 +71,21 @@ Locale=1032
 CodePage=1253
 [Version Info Keys]
 CompanyName=
-FileDescription=
+FileDescription=Grid Search Demo
 FileVersion=1.0.0.0
 InternalName=
-LegalCopyright=
+LegalCopyright=(C)2003 G.Birbilis <birbilis@kagi.com>
 LegalTrademarks=
 OriginalFilename=
 ProductName=
 ProductVersion=1.0.0.0
 Comments=
 [Excluded Packages]
+C:\Users\birbilis\PROJECTS\QT4Delphi\controls\output\Delphi5\QT4Delphi_controls.bpl=AgrinioClub's QT4Delphi
 C:\diskD\TEST\dfs\DFS50D.bpl=DFS Components
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+[HistoryLists\hlSearchPath]
+Count=1
+Item0=C:\Users\birbilis\PROJECTS\Delphi-JEDI\QT\QuickTime\pas;C:\Users\birbilis\PROJECTS\Components\TExpression;C:\Users\birbilis\PROJECTS\Components\TExecutableLabel;C:\Users\birbilis\DELPHI\LIB\Text;C:\Users\birbilis\DELPHI\LIB;C:\Users\birbilis\DELPHI\LIB\trees\treent;$(DELPHI)\lib
