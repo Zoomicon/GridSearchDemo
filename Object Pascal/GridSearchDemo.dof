@@ -40,7 +40,7 @@ ImageBase=4194304
 ExeDescription=
 [Directories]
 OutputDir=
-UnitOutputDir=
+UnitOutputDir=dcu
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=C:\Users\birbilis\PROJECTS\Delphi-JEDI\QT\QuickTime\pas;C:\Users\birbilis\PROJECTS\Components\TExpression;C:\Users\birbilis\PROJECTS\Components\TExecutableLabel;C:\Users\birbilis\DELPHI\LIB\Text;C:\Users\birbilis\DELPHI\LIB;C:\Users\birbilis\DELPHI\LIB\trees\treent;$(DELPHI)\lib
@@ -89,3 +89,6 @@ Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlSearchPath]
 Count=1
 Item0=C:\Users\birbilis\PROJECTS\Delphi-JEDI\QT\QuickTime\pas;C:\Users\birbilis\PROJECTS\Components\TExpression;C:\Users\birbilis\PROJECTS\Components\TExecutableLabel;C:\Users\birbilis\DELPHI\LIB\Text;C:\Users\birbilis\DELPHI\LIB;C:\Users\birbilis\DELPHI\LIB\trees\treent;$(DELPHI)\lib
+[HistoryLists\hlUnitOutputDirectory]
+Count=1
+Item0=dcu

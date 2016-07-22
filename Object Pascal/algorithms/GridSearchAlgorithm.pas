@@ -3,14 +3,15 @@
 unit GridSearchAlgorithm;
 
 interface
- uses GridUnit;
+ uses Grid;
 
  type
   TGridSearchAlgorithm=class
    protected
     grid:TGrid;
    public
-    constructor Create(theGrid:TGrid);
+    stopped:boolean;
+    constructor Create(theGrid:TGrid); virtual;
     procedure search; virtual; abstract;
    end;
 

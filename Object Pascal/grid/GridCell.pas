@@ -1,6 +1,6 @@
-//Version: 21May2003
+//Version: 27May2003
 
-unit GridCellUnit;
+unit GridCell;
 
 interface
  uses Classes,Controls,ExtCtrls;
@@ -26,6 +26,8 @@ interface
    property step:integer read fStep write setStep default 0;
    property cellType:TCellType read fCellType write setCellType;
  end;
+
+var cellFlashDelay:integer=100000;
 
 implementation
  uses Graphics, SysUtils;
@@ -62,17 +64,17 @@ end;
 
 procedure TGridCell.reset;
 begin
- step:=0;
- cellType:=ctEmpty;
+ fStep:=0;
+ if cellType=ctSearched then cellType:=ctEmpty;
 end;
 
 procedure TGridCell.flash;
 var i:integer;
 begin
- for i:=0 to 100000 do color:=clYellow;
+ for i:=0 to cellFlashDelay do color:=clYellow;
  repaint;
  parent.Repaint;
- for i:=0 to 100000 do cellType:=cellType;
+ for i:=0 to cellFlashDelay do cellType:=cellType;
  repaint;
  parent.Repaint;
 end;
@@ -97,16 +99,18 @@ begin
    end
 
    else
-
-   if button=mbRight then
-    cellType:=ctEmpty
-   else
-    case cellType of
-     ctEmpty: cellType:=ctObstacle;
-     ctObstacle: cellType:=ctStart;
-     ctStart: cellType:=ctGoal;
-     ctGoal: cellType:=ctEmpty;
-     end;
+    begin
+    fStep:=0;
+    if button=mbRight then
+     cellType:=ctEmpty
+    else
+     case cellType of
+      ctEmpty: cellType:=ctObstacle;
+      ctObstacle: cellType:=ctStart;
+      ctStart: cellType:=ctGoal;
+      ctGoal: cellType:=ctEmpty;
+      end;
+    end;
   end;
 end;
 

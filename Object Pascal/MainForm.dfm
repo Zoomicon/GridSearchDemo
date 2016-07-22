@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 395
-  Top = 132
-  Width = 601
-  Height = 542
-  Caption = 'Grid Search Demo'
+  Left = 262
+  Top = 170
+  Width = 682
+  Height = 545
+  Caption = 'Grid Search Demo 1.0'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,14 +11,15 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 120
   TextHeight = 16
   object Panel1: TPanel
     Left = 0
-    Top = 472
-    Width = 593
-    Height = 42
+    Top = 443
+    Width = 674
+    Height = 74
     Align = alBottom
     TabOrder = 0
     object Label1: TLabel
@@ -27,6 +28,13 @@ object Form1: TForm1
       Width = 6
       Height = 16
       Caption = 'x'
+    end
+    object Label2: TLabel
+      Left = 8
+      Top = 40
+      Width = 39
+      Height = 16
+      Caption = 'Delay:'
     end
     object edCols: TEdit
       Left = 8
@@ -79,14 +87,41 @@ object Form1: TForm1
       TabOrder = 5
       Items.Strings = (
         'Depth first'
-        'Breadth first')
+        'Breadth first'
+        'Best first')
+    end
+    object sldDelay: TTrackBar
+      Left = 64
+      Top = 40
+      Width = 599
+      Height = 25
+      Anchors = [akLeft, akTop, akRight]
+      Max = 500000
+      Orientation = trHorizontal
+      Frequency = 1
+      Position = 100000
+      SelEnd = 0
+      SelStart = 0
+      TabOrder = 6
+      TickMarks = tmBottomRight
+      TickStyle = tsNone
+      OnChange = sldDelayChange
+    end
+    object btnHelp: TButton
+      Left = 592
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Help'
+      TabOrder = 7
+      OnClick = btnHelpClick
     end
   end
   object MainPanel: TPanel
     Left = 0
     Top = 0
-    Width = 593
-    Height = 472
+    Width = 674
+    Height = 443
     Align = alClient
     TabOrder = 1
   end

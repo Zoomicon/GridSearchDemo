@@ -3,11 +3,13 @@ program GridSearchDemo;
 uses
   Forms,
   MainForm in 'MainForm.pas' {Form1},
-  GridCellUnit in 'GridCellUnit.pas',
-  GridUnit in 'GridUnit.pas',
-  GridSearchAlgorithm in 'GridSearchAlgorithm.pas',
-  DepthFirstSearchAlgorithm in 'DepthFirstSearchAlgorithm.pas',
-  BreadthFirstSearchAlgorithm in 'BreadthFirstSearchAlgorithm.pas';
+  GridCellList in 'grid\GridCellList.pas',
+  GridCell in 'grid\GridCell.pas',
+  Grid in 'grid\Grid.pas',
+  GridSearchAlgorithm in 'algorithms\GridSearchAlgorithm.pas',
+  BreadthFirstSearchAlgorithm in 'algorithms\BreadthFirstSearchAlgorithm.pas',
+  DepthFirstSearchAlgorithm in 'algorithms\DepthFirstSearchAlgorithm.pas',
+  BestFirstSearchAlgorithm in 'algorithms\BestFirstSearchAlgorithm.pas';
 
 {$R *.RES}
 

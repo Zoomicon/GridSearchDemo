@@ -1,9 +1,11 @@
-//Version: 21May2003
+//Version: 27May2003
 
-unit GridUnit;
+{$B-}
+
+unit Grid;
 
 interface
- uses Classes,Controls,ExtCtrls,GridCellUnit;
+ uses Classes,Controls,ExtCtrls,GridCell;
 
  type TGrid=class(TPanel)
   private
@@ -12,6 +14,7 @@ interface
   public
    constructor Create(theParent:TWinControl;theRows,theCols:integer);
    procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
+   function findEmptyCell(const theRow,theCol:integer):TGridCell;
    function findCell(const theRow,theCol:integer):TGridCell; overload;
    function findCell(const theStep:integer):TGridCell; overload;
    function findCell(const theStartIndex:integer;const theCellType:TCellType):TGridCell; overload;
@@ -19,6 +22,8 @@ interface
    function findStart(const theStartIndex:integer):TGridCell; overload;
    function findGoal:TGridCell; overload;
    function findGoal(const theStartIndex:integer):TGridCell; overload;
+   function isEmpty(row,col:integer):boolean;
+   function hasEmptyNeighbours(c:TGridCell):boolean;
    function hasSingleStart:boolean;
    function hasGoal:boolean;
    procedure reset;
@@ -65,6 +70,12 @@ begin
     b.top:=(row-1)*h;
     b.left:=(col-1)*w;
    end;
+end;
+
+function TGrid.findEmptyCell(const theRow,theCol:integer):TGridCell;
+begin
+ result:=findCell(theRow,theCol);
+ if (result<>nil) and (result.cellType<>ctEmpty) then result:=nil;
 end;
 
 function TGrid.findCell(const theRow,theCol:integer):TGridCell;
@@ -167,9 +178,26 @@ begin
   begin
   c:=Components[i];
   if c is TGridCell then
-   with (c as TGridCell) do
-    if cellType=ctSearched then reset; //the cell, not the grid
+   with (c as TGridCell) do reset //the cell, not the grid
   end;
+end;
+
+function TGrid.isEmpty(row,col:integer):boolean;
+var c:TGridCell;
+begin
+ c:=findCell(row,col);
+ result:=(c<>nil) and (c.cellType=ctEmpty);
+end;
+
+function TGrid.hasEmptyNeighbours(c:TGridCell):boolean;
+begin
+ if c=nil
+  then result:=false
+  else with c do
+   result:=isEmpty(row,col+1) or
+           isEmpty(row-1,col) or
+           isEmpty(row,col-1) or
+           isEmpty(row+1,col);
 end;
 
 function TGrid.hasSingleStart:boolean;

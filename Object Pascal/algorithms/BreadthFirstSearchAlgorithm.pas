@@ -1,9 +1,9 @@
-//Version: 21May2003
+//Version: 26May2003
 
 unit BreadthFirstSearchAlgorithm;
 
 interface
- uses GridCellUnit, GridSearchAlgorithm;
+ uses GridCell, GridSearchAlgorithm;
 
  type TBreadthFirstSearchAlgorithm=class(TGridSearchAlgorithm)
    private
@@ -17,20 +17,24 @@ interface
    end;
 
 implementation
- uses SysUtils,Dialogs;
+ uses SysUtils, Dialogs, Forms;
 
 procedure TBreadthFirstSearchAlgorithm.search;
-var c:TGridCell;
 begin
- if grid=nil then exit;
+ if grid=nil then
+  begin
+  ShowMessage('Missing grid');
+  exit;
+  end;
+
  with grid do
   begin
-  c:=findStart();
   currentStep:=0;
   searchBottom:=0;
-  if checkNeighbours(c)
-   then ShowMessage('found in '+intToStr(currentStep)+' steps')
-   else ShowMessage('not found');
+  if checkNeighbours(findStart()) then
+   if not stopped
+    then ShowMessage('found in '+intToStr(currentStep)+' steps')
+    else ShowMessage('not found');
   end;
 end;
 
@@ -54,16 +58,17 @@ begin
   c.flash;
   result:=checkNeighbours(c);
   end
- else
-  result:=false;
+ else result:=false;
 end;
 
 function TBreadthFirstSearchAlgorithm.checkCell(row,column:integer):boolean;
 var c:TGridCell;
 begin
+ Application.processMessages; //don't freeze application's GUI
+
  c:=grid.findCell(row,column);
 
- if c=nil then
+ if stopped or (c=nil) then
   begin
   result:=false;
   exit;

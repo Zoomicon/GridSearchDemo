@@ -1,9 +1,9 @@
-//Version: 21May2003
+//Version: 26May2003
 
 unit DepthFirstSearchAlgorithm;
 
 interface
- uses GridCellUnit, GridSearchAlgorithm;
+ uses GridCell, GridSearchAlgorithm;
 
  type TDepthFirstSearchAlgorithm=class(TGridSearchAlgorithm)
    protected
@@ -14,25 +14,31 @@ interface
    end;
 
 implementation
- uses SysUtils,Dialogs;
+ uses SysUtils, Dialogs, Forms;
 
 procedure TDepthFirstSearchAlgorithm.search;
-var c:TGridCell;
 begin
- if grid=nil then exit;
+ if grid=nil then
+  begin
+  ShowMessage('Missing grid');
+  exit;
+  end;
+
  with grid do
   begin
-  c:=findStart();
   currentStep:=0;
-  if searchCell(c)
-   then ShowMessage('found in '+intToStr(currentStep)+' steps')
-   else ShowMessage('not found');
+  if searchCell(findStart()) then
+   if not stopped
+    then ShowMessage('found in '+intToStr(currentStep)+' steps')
+    else ShowMessage('not found');
   end;
 end;
 
 function TDepthFirstSearchAlgorithm.searchCell(c:TGridCell):boolean;
 begin
- if c=nil then
+ Application.processMessages; //don't freeze application's GUI
+
+ if stopped or (c=nil) then
   begin
   result:=false;
   exit;
@@ -47,7 +53,8 @@ begin
     step:=grid.currentStep; //will mark the cell as searched
     result:=true;
     end
-   else if (cellType=ctEmpty) or ((grid.currentStep=0) and (cellType=ctStart)) then
+   else if (cellType=ctEmpty) or
+           ((grid.currentStep=0) and (cellType=ctStart)) then
     begin
     step:=grid.currentStep; //will mark the cell as searched
     grid.currentStep:=grid.currentStep+1;
@@ -71,8 +78,7 @@ begin
   c.flash;
   result:=searchCell(c);
   end
- else
-  result:=false;
+ else result:=false;
 end;
 
 end.
