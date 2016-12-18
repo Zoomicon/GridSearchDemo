@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 262
   Top = 170
-  Width = 682
-  Height = 545
   Caption = 'Grid Search Demo 1.0'
+  ClientHeight = 506
+  ClientWidth = 666
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,11 +17,14 @@ object Form1: TForm1
   TextHeight = 16
   object Panel1: TPanel
     Left = 0
-    Top = 443
-    Width = 674
+    Top = 432
+    Width = 666
     Height = 74
     Align = alBottom
     TabOrder = 0
+    DesignSize = (
+      666
+      74)
     object Label1: TLabel
       Left = 72
       Top = 18
@@ -83,7 +86,6 @@ object Form1: TForm1
       Width = 121
       Height = 24
       Style = csDropDownList
-      ItemHeight = 16
       TabOrder = 5
       Items.Strings = (
         'Depth first'
@@ -97,13 +99,8 @@ object Form1: TForm1
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       Max = 500000
-      Orientation = trHorizontal
-      Frequency = 1
       Position = 100000
-      SelEnd = 0
-      SelStart = 0
       TabOrder = 6
-      TickMarks = tmBottomRight
       TickStyle = tsNone
       OnChange = sldDelayChange
     end
@@ -120,8 +117,8 @@ object Form1: TForm1
   object MainPanel: TPanel
     Left = 0
     Top = 0
-    Width = 674
-    Height = 443
+    Width = 666
+    Height = 432
     Align = alClient
     TabOrder = 1
   end
